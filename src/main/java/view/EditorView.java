@@ -196,7 +196,7 @@ public class EditorView extends JPanel {
 	}
 
 	public void showDetails(final int rowIndex) {
-		Player selectedPlayer = model.getPlayers().get(rowIndex);
+		Player selectedPlayer = model.getAllPlayer().get(rowIndex);
 		textFieldName.setText(selectedPlayer.getName());
 		textFieldBirth.setText(selectedPlayer.getBirthYear());
 		textFieldNationality.setText(selectedPlayer.getCountry());
