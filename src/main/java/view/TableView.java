@@ -93,7 +93,7 @@ public class TableView extends JPanel {
 	}
 
 	private void readData() {
-		List<Player> players = model.getPlayers();
+		List<Player> players = model.getAllPlayer();
 
 		Object[][] data = new Object[players.size()][columnNames.length];
 

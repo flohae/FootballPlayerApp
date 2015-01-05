@@ -7,83 +7,80 @@ package model;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CsvParser {
 
-	private static final String path = "src/main/java/model/PlayerWithCountry.csv";
+	public static ArrayList<Player> fileImport() {
+		ArrayList<Player> allPlayer = new ArrayList<>();
+		
+		try
+		{
+			String path = "src/main/java/model/PlayerWithCountry.csv";
+			FileInputStream fis = new FileInputStream(path);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fis, "UTF-8"));
+			String stringRead = br.readLine();
 
-	private static final int COLUMN_RANK = 0;
-	private static final int COLUMN_NAME = 1;
-	private static final int COLUMN_BIRTHYEAR = 2;
-	private static final int COLUMN_COUNTRY = 3;
-	private static final int COLUMN_ASSOCIATION = 4;
-	private static final int COLUMN_POSITION = 5;
-	private static final int COLUMN_MATCH100 = 6;
-	private static final int COLUMN_MATCH100AGAINST = 7;
-	private static final int COLUMN_NUMBEROFMATCHESFIFA = 8;
-	private static final int COLUMN_NUMBEROFMATCHESRSSSF = 9;
-	private static final int COLUMN_FIRSTMATCH = 10;
-	private static final int COLUMN_LASTMATCH = 11;
+			while (stringRead != null) {
+				String[] elements = stringRead.split(";", -1);
+				String rank = elements[0];
+				String name = elements[1];
+				String birthYear = elements[2];
+				String country = elements[3];
+				String association = elements[4];
+				String position = elements[5];
+				String match100 = elements[6];
+				String match100Against = elements[7];
+				String numberOfMatchesFIFA = elements[8];
+				String numberOfMatchesRSSSF = elements[9];
+				String firstMatch = elements[9];
+				String lastMatch = elements[10];
 
-	public static List<Player> parseCsvFile() {
-		List<Player> players = new LinkedList<>();
-
-		try (BufferedReader buf = new BufferedReader(new FileReader(new File(path)))) {
-			
-			String line;
-			
-			while ((line = buf.readLine()) != null) {
-				String[] values = line.split(";");
-				String rank = values[COLUMN_RANK];
-				String name = values[COLUMN_NAME];
-				String birthYear = values[COLUMN_BIRTHYEAR];
-				String country = values[COLUMN_COUNTRY];
-				String association = values[COLUMN_ASSOCIATION];
-				String position = values[COLUMN_POSITION];
-				String match100 = values[COLUMN_MATCH100];
-				String match100Against = values[COLUMN_MATCH100AGAINST];
-				String numberOfMatchesFIFA = values[COLUMN_NUMBEROFMATCHESFIFA];
-				String numberOfMatchesRSSSF = values[COLUMN_NUMBEROFMATCHESRSSSF];
-				String firstMatch = values[COLUMN_FIRSTMATCH];
-				String lastMatch = values[COLUMN_LASTMATCH];
-
-				players.add(new Player(rank, name, country, birthYear, association, position, match100,
+				allPlayer.add(new Player(rank, name, country, birthYear, association, position, match100,
 						match100Against, numberOfMatchesFIFA, numberOfMatchesRSSSF, firstMatch, lastMatch));
+				// read the next line
+				stringRead = br.readLine();
 			}
-			
+			br.close();			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-
-		return players;
+		} return allPlayer;
 	}
 
-	public static List<Player> writeCsvFile() {
-		List<Player> players = new LinkedList<Player>();
+	public static void fileExport(ArrayList<Player> allPlayer, String file) {
 
-		try (BufferedWriter buf = new BufferedWriter(new FileWriter(new File(path)))) {
-			
-			
-			buf.append("#Platz;Name;Geboren;Land;Verband;Position;100. Spiel;Gegner;Spiele(FIFA);Spiele(RSSSF);Von;Bis;\r\n");
-			for (Player p : players) {
-				buf.append(p.getRank() + ";" + p.getName() + ";" + p.getBirthYear() + ";" + p.getCountry() + ";"
+		FileOutputStream fos;
+		try {
+
+			// String path = "src/football/model/PlayerWithCountry.csv";
+			fos = new FileOutputStream(file);
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));
+			bw.append("#Platz;Name;Geboren;Land;Verband;Position;100. Spiel;Gegner;Spiele(FIFA);Spiele(RSSSF);Von;Bis;\r\n");
+			for (Player p : allPlayer) {
+				bw.append(p.getRank() + ";" + p.getName() + ";" + p.getBirthYear() + ";" + p.getCountry() + ";"
 						+ p.getPosition() + ";" + p.getAssociation() + ";" + p.getNumberOfMatchesFIFA() + ";"
 						+ p.getNumberOfMatchesRSSSF() + ";" + p.getMatch100() + ";" + p.getMatch100Against() + ";"
 						+ p.getFirstMatch() + ";" + p.getLastMatch() + ";\r\n");
 			}
-			
-			buf.flush();
-			buf.close();
-			
+
+			bw.flush();
+			bw.close();
+
+			System.out.println(allPlayer.get(1).getName());
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return players;
+
 	}
 
 }

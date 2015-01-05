@@ -98,7 +98,7 @@ public class TitleView extends JToolBar {
 		btn_saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PlayerModel.saveData();
+				model.saveData();
 			}
 		});
 	

@@ -21,6 +21,22 @@ public class Player {
 
 	private String playerInfos;
 	
+	//defaut Constructor
+		public Player() {
+			this.rank = "0";
+			this.name = "Vorname Nachname";
+			this.country = "Land";
+			this.birthYear = "1990";
+			this.association = "Verband";
+			this.position = "Position";
+			this.match100 = "xx.xx.xxxx";
+			this.match100Against = "Gegner";
+			this.numberOfMatchesFIFA = "100";
+			this.numberOfMatchesRSSSF = "100";
+			this.firstMatch = "xx.xx.xxxx";
+			this.lastMatch = "xx.xx.xxxx";
+		}
+	
 	public Player(String rank, String name, String country, String birthYear, String association,
 			String position, String match100, String match100Against, String numberOfMatchesFIFA,
 			String numberOfMatchesRSSSF, String firstMatch, String lastMatch) {
