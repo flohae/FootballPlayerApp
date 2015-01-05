@@ -9,6 +9,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import model.Player;
 import model.PlayerModel;
 import view.EditorView;
 import view.MainFrame;
@@ -27,6 +28,30 @@ public class Controller {
 	public Controller(PlayerModel model) {
 		this.model = model;
 		
+	}
+	
+	public void setCurrentPlayer(int row) {
+		if (row != -1){
+			model.setCurrentPlayer(model.getAllPlayer().get(row));
+		} else {
+			model.setCurrentPlayer(null);
+		}
+	}
+	
+	public Player getCurrentPlayer() {
+		return model.getCurrentPlayer();
+	}
+	
+	public void setName(String name) {
+		model.setCurrentPlayerName(name);
+	}
+	
+	public void setNewPlayer(){
+		model.setNewPlayer();
+	}
+	
+	public void removeCurrentPlayer(){
+		model.removeCurrentPlayer();
 	}
 	
 	public static void setLookAndFeel() {

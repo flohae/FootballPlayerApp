@@ -56,7 +56,7 @@ public class CsvParser {
 		} return allPlayer;
 	}
 
-	public static void fileExport(ArrayList<Player> allPlayer, String file) {
+	public static void fileExport(ArrayList<Player> allPlayer,String file) {
 
 		FileOutputStream fos;
 		try {
@@ -64,7 +64,7 @@ public class CsvParser {
 			// String path = "src/football/model/PlayerWithCountry.csv";
 			fos = new FileOutputStream(file);
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));
-			bw.append("#Platz;Name;Geboren;Land;Verband;Position;100. Spiel;Gegner;Spiele(FIFA);Spiele(RSSSF);Von;Bis;\r\n");
+			//bw.append("#Platz;Name;Geboren;Land;Verband;Position;100. Spiel;Gegner;Spiele(FIFA);Spiele(RSSSF);Von;Bis;\r\n");
 			for (Player p : allPlayer) {
 				bw.append(p.getRank() + ";" + p.getName() + ";" + p.getBirthYear() + ";" + p.getCountry() + ";"
 						+ p.getPosition() + ";" + p.getAssociation() + ";" + p.getNumberOfMatchesFIFA() + ";"

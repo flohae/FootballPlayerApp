@@ -6,6 +6,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -16,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import view.TableView.TeamAdapter;
 import controller.Controller;
 import model.PlayerModel;
 
@@ -34,6 +36,8 @@ public class TitleView extends JToolBar {
 
 	private PlayerModel model;
 	private Controller controller;
+	private TableView table;
+	private TeamAdapter tableAdapter;
 	
 	public TitleView(PlayerModel model) {
 		this.model = model;
@@ -99,6 +103,33 @@ public class TitleView extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				model.saveData();
+			}
+		});
+		
+		btn_plusButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.setNewPlayer();
+				table.updateUI();
+//				table.setRowSelectionInterval(0, model.getAllPlayer().size() -1);
+//				table.scrollRectToVisible(new Rectangle(table.getCellRect(model.getAllPlayer().size() -1, 0, true)));
+			}
+		});
+		
+		btn_minusButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				int rowIndex = table.getSelectedRow();
+//				int rowCount = tableAdapter.getRowCount();
+//				if (rowIndex == rowCount - 1) {
+//					controller.removeCurrentPlayer();
+//					controller.setCurrentPlayer(rowIndex - 1);
+//					table.setRowSelectionInterval(0, model.getAllPlayer().size() -1);
+//				} else {
+//					controller.removeCurrentPlayer();
+//					controller.setCurrentPlayer(rowIndex);
+//				}
+//				table.updateUI();
 			}
 		});
 	
